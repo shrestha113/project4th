@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <link rel="stylesheet" href="src/style.css">
+    
+    <header>
+        <div class="nav_Container">
+          <nav class="navbar">
+            <a class="logooo" href="/index.html" class="nav-logo">
+              Student Portal
+            </a>
+  
+            <ul class="nav-menu">
+              <li class="nav-item">
+                <a href="/index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">About</a>
+              </li>
+              <li class="nav-item">
+                <a href="login.html" class="nav-link">Log in </a>
+              </li>
+            </ul>
+  
+            <div class="hamburger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+  
+      <div class="register_form">
+        <form action="action_page.php" method="post">
+            <div class="form_container">
+                 <h1>Registration Form</h1>
+
+                <input
+                  type="text"
+                  placeholder="Enter Username"
+                  name="uname"
+                  required
+                />
+    
+                <input
+                type="text"
+                placeholder="Number"
+                name="uname"
+                required
+              />
+      
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="psw"
+                  required
+                />
+    
+                <input
+                  type="password"
+                  placeholder="Conform Password"
+                  name="psw"
+                  required
+                />
+    
+              <select name="cars" id="cars">
+                <option value="volvo" selected >Select a Faculty</option>
+                <option value="saab">BCA</option>
+                <option value="mercedes">CSIT</option>
+                <option value="audi">BIM</option>
+              </select>
+              
+      
+              <button type="submit">Register</button>
+      
+            
+            </div>
+          </form>
+      </div>
+
+
+</body>
+</html>

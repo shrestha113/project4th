@@ -1,0 +1,437 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body{
+
+    font-family: 'Poppins', sans-serif;
+    color: #252525;
+    font-size: 18px;
+}
+
+body h1,h2, h3 {
+    font-family: 'Work Sans', sans-serif;
+}
+
+/* nav */
+
+.logooo {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #101010;
+}
+
+.nav_Container {
+    margin: auto;
+    box-shadow: 0px 0px 5px;
+    background: rgb(219, 219, 219);
+}
+
+.header{
+    border-bottom: 1px solid #224b80;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+.nav-link{
+    font-size: 20px;
+    font-weight: 400;
+    color: #475569;
+}
+
+.navbar ul li{
+    list-style: none !important;
+    
+}
+
+.navbar ul li a{
+    text-decoration: none;
+}
+
+.nav-link:hover{
+    color: #06b7ce;
+}
+
+.nav-logo {
+    height: 70px;
+    width: 70px;
+}
+
+.nav-logo img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        position: absolute;
+        left: 0;
+        z-index: 10;
+        top: 5rem;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow:
+            0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-menu.active {
+        /* blcok = show */
+        display: block;
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+}
+  
+
+
+/* home page */
+
+.bg_image {
+    height: 100vh;
+    width: 100%;
+    background: url('./images/homePage.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+
+.overlay{
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+/* background: linear-gradient(81deg, rgba(0, 3, 10, 0.753) 43%, rgba(0, 1, 5, 0.39) 99%); */
+background: linear-gradient(81deg, rgba(0, 3, 10, 0.836) 10%, rgba(0, 1, 5, 0.158) 99%);
+
+}
+
+
+
+.home_container {
+    max-width: 1366px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.student_detail {
+    color: rgb(255, 255, 255);
+    position: relative;
+    z-index: 22;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+
+.student_detail h1 {
+    position: relative;
+    font-size: 54px;
+    color: rgb(255, 255, 255);
+    padding-bottom:10px ;
+}
+
+
+
+.student_detail p {
+    font-size: 20px;
+}
+
+.btn_primary {
+    margin-top: 20px;
+    font-size: 22px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    color: rgb(27, 27, 27);
+}
+
+.btn_primary:hover{
+    background: blueviolet;
+    transition: 0.2s ease-in;
+    color: white;
+    cursor: pointer;
+}
+
+.banner_wrap {
+    height: 300px;
+    background: red;
+}
+
+.banner_container {
+    background: url(images/ai-generated-8225347_640.webp);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.banner_container {
+    font-size: 30px;
+}
+
+.container {
+    max-width: 1366px;
+    margin: auto;
+    position: relative;
+    z-index: 10;
+    color: white;
+    height: 100%;
+    display: flex;
+    align-items: end;
+    padding-bottom: 40px;
+    z-index: 1;
+}
+
+
+
+/*  login css */
+
+.form_container H1 {
+    font-size: 25px;
+    font-weight: 300;
+    padding-bottom: 20px;
+}
+
+label {
+    font-size: 15px;
+}
+
+  
+  input[type=text], input[type=password] , select {
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+
+
+.register_new_acc a{
+    color: #475569;
+    text-decoration: none !important;
+    font-size: 15px;
+} 
+
+
+  .form_container {
+    box-shadow: 0px 0px 10px -4px;
+
+    background: rgb(223, 223, 223);
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 10rem;
+}
+
+
+/* about  */
+.about_banner {
+    background-image: url('./images/homePage.jpg');
+    background-position: center;
+    height: 400px;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.425);
+}
+
+.about_banner h1 {
+    color: white;
+    font-size: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    text-transform: capitalize;
+    padding-left: 10px;
+}
+
+.about_image , .about_content{
+    width: 50%;
+    padding: 30px;
+}
+
+.about_image img {
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about_dev {
+    display: flex;
+    align-items: center;
+    padding: 80px 0px;
+    background: rgb(225, 225, 225);
+}
+
+.about_content h2{
+    padding-bottom: 30px;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width:768px) {
+    .about_image , .about_content{
+        width: 100% !important;
+        padding: 30px;
+    }
+
+    .about_dev {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+/* portal css */
+
+.head_wrap{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+    background: rgb(194, 194, 194);
+}
+
+.side_menu{
+    padding: 20px;
+    width: 22%;
+    color: white;
+    background: linear-gradient(10deg, rgba(31,31,31,1) 0%, rgba(0,15,97,1) 100%);
+}
+
+.info_tab{
+    padding: 20px;
+    width: 73%;
+}
+
+.student_info {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.student_info h3 {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.avatar_profile {
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    margin-top:50px ;
+}
+
+.avatar_profile img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.navigation ul {
+    list-style: none;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: white;
+}
+
+.navigation a:hover{
+    color: rgb(155, 155, 155)smoke;
+}
+
+.navigation {
+    border-top: 3px solid rgb(189, 189, 189);
+    padding-top: 45px;
+    margin-top: 50px;
+    padding-left: 20px;
+}
+
+.navigation h4 {
+    margin-bottom: 30px;
+}
+
+.navigation ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
