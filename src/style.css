@@ -361,7 +361,6 @@ label {
 .head_wrap{
     display: flex;
     flex-direction: row;
-    height: 100vh;
     width: 100%;
     background: rgb(194, 194, 194);
 }
@@ -435,3 +434,11 @@ label {
     gap: 30px;
 }
 
+.dashboard {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+ 
