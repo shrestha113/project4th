@@ -139,7 +139,7 @@ if (isset($_GET['delid'])) {
 
             <div class="navigation">
                 <ul>
-                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index1.php">Home</a></li>
                     <li><a href="examform.html">Registration Form</a></li>
                     <li><a href="timetable.html">Time Table</a></li>
                     <li><a href="marks.html">Marks</a></li>

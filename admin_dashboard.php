@@ -86,7 +86,7 @@
       <div class="navigation">
         <ul>
           <li><a href="admin_dashboard.php">Home</a></li>
-          <li><a href="records.php">Records</a></li>
+          <li><a href="index1.php">Records</a></li>
           <a href="login.php" class="logout-btn">Logout</a>
         </ul>
       </div>

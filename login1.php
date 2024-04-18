@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Login successful, set session variables and redirect
+            // Login successful, set session username and role
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $role;
 
