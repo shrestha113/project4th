@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Establish database connection
     $servername = "localhost";
     $username = "root";
     $password = ""; // Or your MySQL password
-    $dbname = "phpcrud";
+    $dbname = "project";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -16,49 +15,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Retrieve form data
-    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $role = $_POST['role'];
+    $username = $_POST['User_id'];
+    $password = $_POST['password'];
+    
+    $role = $_POST['role'];
 
+    // Validate form fields
+    if (empty($username) || empty($password) || empty($role)) {
+        $error_message = "All fields are required.";
+    } else {
         // Validate login credentials
-        $sql = "SELECT * FROM users WHERE username=? AND password=? AND role=?";
+        $sql = "SELECT * FROM users WHERE User_id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $username, $password, $role);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Login successful, set session username and role
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
+            $row = $result->fetch_assoc();
+            if (password_verify($password, $row['Password']) && $row['Role'] === $role) {
+                // Login successful, set session username and role
+                $_SESSION['User_id'] = $username;
+                $_SESSION['Role'] = $role;
+                $_SESSION['id']=$row['id'];
 
-            // Redirect to dashboard
-            switch ($role) {
-                case 'student':
-                    header("Location: portal1.php");
-                    exit;
-                case 'teacher':
-                    header("Location: teacher_dashboard.php");
-                    exit;
-                case 'admin':
-                    header("Location: admin_dashboard.php");
-                    exit;
+
+                // Redirect to dashboard
+                switch ($role) {
+                    case 'student':
+                        header("Location: portal1.php");
+                        exit;
+                    case 'teacher':
+                        header("Location: teacher_dashboard.php");
+                        exit;
+                    case 'admin':
+                        header("Location: admin_dashboard.php");
+                        exit;
+                    default:
+                        $error_message = "Invalid role.";
+                        break;
+                }
+            } else {
+                // Login failed, set error message
+                $error_message = "Invalid username, password, or role.";
             }
         } else {
             // Login failed, set error message
-            $error_message = "Invalid username or password or role.";
+            $error_message = "Invalid username.";
         }
-
-        $stmt->close();
-    } else {
-        // Form fields are not set, set error message
-        $error_message = "Form fields are not set.";
     }
 
+    $stmt->close();
     $conn->close();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f2f2f2;
+            background: linear-gradient(10deg, rgba(31, 31, 31, 1) 0%, rgba(0, 15, 97, 1) 100%);
         }
 
         .login-container {
@@ -116,6 +125,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         button:hover {
             background-color: #0056b3;
         }
+
+        .forgot-password {
+            margin: 10px;
+            text-align: center;
+        }
+        .forgot-password a{
+            text-decoration:none;
+            color:blue;
+        }
     </style>
 </head>
 
@@ -128,14 +146,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<p style="color: red;">' . $error_message . '</p>';
         }
         ?>
-        <form id="login-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-            <input type="text" name="username" placeholder="Username" required>
+        <form id="login-form" action="login1.php" method="POST">
+            <input type="text" name="User_id" placeholder="User_id" required>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <select name="role" required>
                 <option value="student">Student</option>
                 <option value="teacher">Teacher</option>
                 <option value="admin">Admin</option>
             </select>
+        <div class="forgot-password">
+            <a href="forgot_password.php">Change Password</a>
+        </div>
             <button type="submit">Login</button>
         </form>
     </div>

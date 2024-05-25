@@ -1,92 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sms</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>My Website</title>
 </head>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-</style>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
-  </style>
-
-<!-- css -->
-<link rel="stylesheet" href="src/style.css">
-
 <body>
-
-  
-    <header>
-
-        <div class="nav_Container">
-         <nav class="navbar">
-
-             <a class="logooo" href="/index.html" class="nav-logo">
-                Student Portal
-             </a>
-
-             <ul class="nav-menu">
-                 <li class="nav-item">
-                     <a href="/index.html" class="nav-link">Home</a>
-                 </li>
-                 <li class="nav-item">
-                     <a href="about.html" class="nav-link">About</a>
-                 </li>                                
-                 <li class="nav-item">
-                     <a href="login.html" class="nav-link">Log in </a>
-                 </li>
-             </ul>
-
-             <div class="hamburger">
-                 <span class="bar"></span>
-                 <span class="bar"></span>
-                 <span class="bar"></span>
-             </div>
-             
-         </nav>
+  <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#hero">
+            <h1><span>C</span>ollege <span>W</span>ebsite</h1>
+          </a>
         </div>
-  
-     </header>
-   
-
-
-    <!-- home page -->
-
-    <section>
-        <div class="landing_page">
-
-            <div class="bg_image">
-                <div class="overlay"></div>
-
-               <div class="home_container">
-
-                <div class="student_detail">
-                    <h1>Welcome to Student Portal</h1>
-                    <p>
-                        Upgrade your education with our Student Portal – it connects students, teachers, and staff, making communication and learning easy and efficient
-                    </p>
-                    <a href="portal.html"><button class="btn_primary">Log in </button></a>
-
-                  
-                </div>
-
-               </div>
-
-            </div>
-
+        <div class="nav-list">
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+          <ul>
+            <li><a href="#hero" data-after="Home">Home</a></li>
+            <li><a href="#projects" data-after="Projects">Gallery</a></li>
+            <li><a href="#about" data-after="About">About</a></li>
+            <li><a href="#contact" data-after="Contact">Contact</a></li>
+            <li><a href="login1.php" data-after="Login">Login</a></li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
 
-    <!-- home page ends -->
 
+  <!-- Hero Section  -->
+  <section id="hero">
+    <div class="hero container">
+      <div>
+        <h1>Welcome, <span></span></h1>
+        <h1>To The<span></span></h1>
+        <h1>College <span></span></h1>
+        <a href="login1.php" type="button" class="cta">Login</a>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section  -->
 
-    <!--  -->
-    
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="projects container">
+      <div class="projects-header">
+        <h1 class="section-title">Some <span>Memories</span></h1>
+      </div>
+      <div class="all-projects">
+        <div class="project-item">
+          <div class="project-info">
+            <h1>Basketball Tournament</h1>
+            <h2>Courtside Chronicles: Basketball and College Life</h2>
+            <p>Step onto the hardwood and into the heart of college basketball culture. From electrifying game nights to intense practices, experience the thrill of competition and camaraderie that defines the sport. Join players and fans alike as they unite in their passion for the game, leaving an indelible mark on campus life.</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/basketball.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>Drawing Competition</h1>
+            <h2>Campus Canvas: Painting the Portrait of College Life</h2>
+            <p>Immerse yourself in the dynamic canvas of college life, where academic pursuits blend with artistic expression, cultural appreciation, and athletic achievement. Explore the diverse palette of activities that color the student experience, shaping identities, fostering connections, and leaving indelible marks on the campus landscape.</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/drawing.jpeg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>College Life</h1>
+            <h2>Pathways to Discovery: Navigating College Life</h2>
+            <p> Embark on a journey of self-discovery and growth as students navigate the multifaceted landscape of college life. Through academic exploration, extracurricular involvement, cultural immersion, and athletic engagement, individuals forge their unique pathways, uncovering passions, and cultivating lifelong skills along the way.</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/activity.jpg" alt="img">
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Projects Section -->
 
-    <script src="src/app.js"></script>
+  <!-- About Section -->
+  <section id="about">
+    <div class="about container">
+      <div >
+        <div class="about-img">
+          <img src="./img/mero.jpg" alt="img">
+        </div>
+      </div>
+      <div class="col-right">
+        <h1 class="section-title">About </h1>
+        <h2>Prestigious College</h2>
+        <p>Our college stands as a testament to the enduring pursuit of knowledge and excellence. Established with a vision to empower minds and transform lives, we have cultivated a legacy of academic rigor and innovation. Guided by our core values of integrity, inclusivity, and scholarship, we strive to nurture a vibrant learning community where students are inspired to explore, question, and create.
+
+          From our distinguished faculty to our dedicated staff, every member of our college community plays a vital role in shaping the educational experience we offer. With a commitment to fostering intellectual curiosity and critical thinking skills, we empower our students to thrive in an ever-changing world. Through interdisciplinary collaboration, experiential learning opportunities, and a global perspective, we prepare graduates to become leaders and problem-solvers who make meaningful contributions to society.
+
+          Beyond the classroom, our college is a vibrant hub of cultural exchange and community engagement. Through a diverse array of extracurricular activities, service-learning initiatives, and partnerships with local organizations, we foster an inclusive and supportive environment where students can grow personally and professionally. Whether through student clubs, volunteer opportunities, or internships, we encourage students to pursue their passions and make a positive impact in the world.</p>
+      </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact container">
+      <div>
+        <h1 class="section-title">Contact <span>info</span></h1>
+      </div>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" /></div>
+          <div class="contact-info">
+            <h1>Phone</h1>
+            <h2>+123456</h2>
+            <h2>+111111</h2>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" /></div>
+          <div class="contact-info">
+            <h1>Email</h1>
+            <h2>collegeinfo@gmail.com</h2>
+            <h2>merocollege@gmail.com</h2>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" /></div>
+          <div class="contact-info">
+            <h1>Address</h1>
+            <h2>Khusibun, Sorakhutte, Nepal</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Section -->
+
+  <script src="./app.js"></script>
 </body>
+
 </html>

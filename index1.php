@@ -5,16 +5,7 @@ include ('dbconnection.php');
 if (isset($_GET['delid'])) {
     $delete_id = intval($_GET['delid']); // Sanitize the input to prevent SQL injection
 
-    // Code for deletion
-    $query_delete_tabledata = mysqli_prepare($con, "DELETE FROM tabledata WHERE StudentID=?");
-    mysqli_stmt_bind_param($query_delete_tabledata, "i", $delete_id);
-    $result_delete_tabledata = mysqli_stmt_execute($query_delete_tabledata);
-
-    if (!$result_delete_tabledata) {
-        echo "Error deleting record from tabledata: " . mysqli_error($con);
-    }
-
-    $query_delete_users = mysqli_prepare($con, "DELETE FROM users WHERE userid=?");
+    $query_delete_users = mysqli_prepare($con, "DELETE FROM users WHERE id=?");
     mysqli_stmt_bind_param($query_delete_users, "i", $delete_id);
     $result_delete_users = mysqli_stmt_execute($query_delete_users);
 
@@ -22,9 +13,6 @@ if (isset($_GET['delid'])) {
         echo "Error deleting record from users: " . mysqli_error($con);
     }
 
-
-    // Close prepared statements
-    mysqli_stmt_close($query_delete_tabledata);
     mysqli_stmt_close($query_delete_users);
 }
 ?>
@@ -36,6 +24,7 @@ if (isset($_GET['delid'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="src/style.css">
     <style>
         body {
@@ -55,7 +44,9 @@ if (isset($_GET['delid'])) {
             background-color: #fff;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
         }
-
+        .row{
+            display:flex;
+        }
         .table th,
         .table td {
             border: 1px solid #e9e9e9;
@@ -134,17 +125,18 @@ if (isset($_GET['delid'])) {
                 <img src="./src/images/ass.png" alt="">
             </div>
             <div class="student_info">
-                <h3>Shreebisha Shrestha</h3>
+                <h3>Admin</h3>
             </div>
 
-            <div class="navigation">
-                <ul>
-                    <li><a href="index1.php">Home</a></li>
-                    <li><a href="examform.html">Registration Form</a></li>
-                    <li><a href="timetable.html">Time Table</a></li>
-                    <li><a href="marks.html">Marks</a></li>
-
-                </ul>
+            <div class="navigation"> 
+            <ul>
+                    <li><a href="admin_dashboard.php">Home</a></li>
+                    <li><a href="index1.php">Records</a></li>
+                    <li><a href="table.php">Time Table</a></li>
+                    <li><a href="noticeboard.php">Notice Board</a></li>
+                    <li><a href="marks_portal.php">Marks</a></li>
+                    <a href="login1.php" class="logout-btn">Logout</a>
+                 </ul>
             </div>
         </div>
 
@@ -158,7 +150,7 @@ if (isset($_GET['delid'])) {
                                     <h2>User <b>Management</b></h2>
                                 </div>
                                 <div class="addbutton" align="right">
-                                    <a href="insert.php" class="add-user-btn">Add New User</a>
+                                    <a href="insert1.php" class="add-user-btn">Add New User</a>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +167,7 @@ if (isset($_GET['delid'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM tabledata";
+                                $sql = "SELECT * FROM users";
                                 $result = mysqli_query($con, $sql);
                                 if (mysqli_num_rows($result) > 0) {
                                     $cnt = 1;
@@ -188,13 +180,13 @@ if (isset($_GET['delid'])) {
                                             <td><?php echo $row['PhoneNumber']; ?></td>
                                             <td><?php echo $row['DOB']; ?></td>
                                             <td>
-                                                <a href="read1.php?viewid=<?php echo htmlentities($row['UserID']); ?>"
-                                                    class="action-icons view" title="View" data-toggle="tooltip">View</a>
-                                                <a href="edit1.php?editid=<?php echo htmlentities($row['StudentID']); ?>"
-                                                    class="action-icons edit" title="Edit" data-toggle="tooltip">Edit</a>
-                                                <a href="index1.php?delid=<?php echo htmlentities($row['StudentID']); ?>"
+                                                <a href="read1.php?viewid=<?php echo htmlentities($row['id']); ?>"
+                                                    class="action-icons view" title="View" data-toggle="tooltip"><i class='fas fa-eye'></i></a>
+                                                <a href="edit1.php?editid=<?php echo htmlentities($row['id']); ?>"
+                                                    class="action-icons edit" title="Edit" data-toggle="tooltip"><i class='fas fa-edit'></i></a>
+                                                <a href="index1.php?delid=<?php echo htmlentities($row['id']); ?>"
                                                     class="action-icons delete" title="Delete" data-toggle="tooltip"
-                                                    onclick="return confirm('Do you really want to delete?');">Delete</a>
+                                                    onclick="return confirm('Do you really want to delete?');"><i class='fas fa-trash-alt'></i></a>
                                             </td>
                                         </tr>
                                         <?php

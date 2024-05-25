@@ -1,0 +1,372 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+    transition: all 0.5s;
+}
+body{
+    
+    background-color: #050529;
+}
+nav{
+    width: 100%;
+    background-color: 	#0c0c4f;
+    color: white;
+    z-index: 5;
+}
+nav .topic{
+    padding: 32px;
+}
+nav h1{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+nav ul{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+nav ul li{
+    list-style: none;
+    cursor: pointer;
+}
+
+nav ul li a{
+    display: block;
+    padding: 16px 32px;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+nav ul li a:hover{
+    color: gold;
+}
+
+nav ul li .active{
+    color: #0c0c4f;
+}
+
+#Content{
+    padding: 16px 32px;
+}
+
+#Content ul{
+    padding: 10px  20px;
+}
+
+#Content ul li{
+    margin-bottom: 17px;
+    list-style-type: none;
+    background-color: 	#0c0c4f;
+    color: white;
+    padding: 16px;
+    text-align: center;
+    width: 50%;
+    margin: 10px auto;
+    font-size: 20px;
+    text-decoration: none;
+
+}
+
+#Content ul li a{
+    color: white;
+    text-decoration: none;
+}
+#Content h2{
+    font-size: 35px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.grid-items{
+    height: 50vh;
+    background-color: hotpink;
+}
+
+.grid-items img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 1200px) {
+    .grid-container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+
+
+
+.form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    background-color: 	#0c0c4f;
+}
+
+.cont{
+    background-color: 	#0c0c4f;
+    padding: 20px;
+}
+
+.cont input[type=text], textarea{
+    width: 90%;
+    margin: 10px 20px;
+    padding: 12px;
+    border-style: none;
+    border-radius: 5px;
+}
+
+.button{
+    text-align: center;
+}
+
+.cont input[type=submit] {
+    width: 30%;
+    padding: 12px;
+    border-style: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+.cont input[type=submit]:hover {
+    background-color: black;
+    color: white;
+}
+
+.cont h3{
+    color: white;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.cont p{
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: justify;
+}
+
+.cont .icons{
+    display: grid;
+    width: 20%;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+.icons i{
+    color: white;
+}
+
+.text{
+    margin-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+}
+
+.content{
+    background-color: #0c0c4f;
+    color: rgb(255, 243, 243);
+    position: relative;
+    padding: 20px;
+}
+
+.content h2{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-size: 35px;
+}
+
+.content p{
+    width: 90%;
+    margin: auto;
+    color:rgb(255, 255, 255);
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+}
+.content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}.content img{
+    width: 90%;
+}
+.about{
+    display: flex;
+    align-items: center;
+}
+
+.gallery{
+    grid-column: 1 / -1;
+    padding: 16px;
+    background: 	#0c0c4f;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    letter-spacing: 5px;
+}
+.navy{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: -1;
+}
+
+
+.contain{
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-page{
+    color: white;
+    display: flex;
+    width: 400px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #0c0c4f;
+    line-height: 2;
+    border-radius: 30px;
+}
+.login-form h1{
+    text-align: center;
+}
+.login-form input{
+    border-radius: 10px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+.login-form input[type=submit]{
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding:10px;
+}
+.login-form a{
+    color: rgb(214, 209, 209);
+}
+.login-form a:hover{
+    color:gold;
+}
+.login-form input[type=submit]:hover{
+    background-color: rgb(0, 0, 0);
+    color: gold;
+}
+.login-form {
+    width: 80%;
+    padding: 20px 0px;
+}
+i{
+    padding: 20px;
+}
+.button-1{
+    text-decoration:none;
+    color:white;
+}
+.main button:hover{
+    border:5px solid#0c0c4f;
+    background-color: rgba(101, 115, 244, 0.5);
+    color: black;
+}
+.main{
+    height: 80vh;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.main h2{
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.main p{
+    font-size: 20px;
+}
+
+.main button{
+    padding: 16px 32px;
+    border-style: none;
+    background-color: 	#0c0c4f;
+    border-radius: 4px;
+    letter-spacing: 4px;
+    margin-top: 15px;
+}
+.hp{
+    width: 100%;
+    
+}
+.hp img{
+    left: 0;
+    height: 85vh;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+    top: 100px;
+}
+textarea{
+    resize: none;
+}
+.txt{
+    position: absolute;
+    z-index: 3;
+    color: white;
+
+}
+.transparent{
+    position: absolute;
+    width: 100%;
+    top: 120px;
+    height: 80vh;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+}
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: 	#0c0c4f;
+    color: white;
+    padding: 20px;
+
+}
+
+
+
+

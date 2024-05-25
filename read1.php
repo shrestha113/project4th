@@ -87,27 +87,27 @@ include ('dbconnection.php');
 </head>
 
 <body>
-    <div class="head_wrap">
-        <div class="side_menu">
+<div class="head_wrap">
+    <div class="side_menu">
 
-            <div class="avatar_profile">
-                <img src="./src/images/ass.png" alt="">
-            </div>
-            <div class="student_info">
-                <h3>Shreebisha Shrestha</h3>
-            </div>
+      <div class="avatar_profile">
+        <img src="./src/images/ass.png" alt="">
+      </div>
+      <div class="student_info">
+        <h3>Admin</h3>
+      </div>
 
-            <div class="navigation">
-                <ul>
-                    <li><a href="portal.html">Home</a></li>
-                    <li><a href="examform.html">Registration Form</a></li>
-                    <li><a href="timetable.html">Time Table</a></li>
-                    <li><a href="marks.html">Marks</a></li>
-                    <li><a href="notice.html">Notice Board</a></li>
-
-                </ul>
+      <div class="navigation"> 
+      <ul>
+                    <li><a href="admin_dashboard.php">Home</a></li>
+                    <li><a href="index1.php">Records</a></li>
+                    <li><a href="table.php">Time Table</a></li>
+                    <li><a href="noticeboard.php">Notice Board</a></li>
+                    <li><a href="marks_portal.php">Marks</a></li>
+                    <a href="login1.php" class="logout-btn">Logout</a>
+                 </ul>
             </div>
-        </div>
+    </div>
 
         <div class="info_tab">
             <div class="container1">
@@ -125,7 +125,7 @@ include ('dbconnection.php');
                             <tbody>
                                 <?php
                                 $vid = $_GET['viewid'];
-                                $ret = mysqli_query($con, "select * from tabledata where UserID =$vid");
+                                $ret = mysqli_query($con, "select * from users where id =$vid");
                                 $cnt = 1;
                                 while ($row = mysqli_fetch_array($ret)) {
                                     ?>
@@ -156,9 +156,7 @@ include ('dbconnection.php');
                                     </tr>
                                     <tr>
                                         <th>Student ID</th>
-                                        <td><?php echo $row['StudentID']; ?></td>
-                                        <th>Password</th>
-                                        <td><?php echo $row['Password']; ?></td>
+                                        <td><?php echo $row['User_id']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Course</th>

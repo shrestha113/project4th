@@ -1,3 +1,7 @@
+<?php
+  session_start();  
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +61,6 @@
     .logout-btn {
       display: inline-block;
       padding: 10px 20px;
-      background-color: #f44336;
       color: white;
       text-decoration: none;
       border-radius: 5px;
@@ -83,31 +86,54 @@
         <h3>Admin</h3>
       </div>
 
-      <div class="navigation">
-        <ul>
-          <li><a href="admin_dashboard.php">Home</a></li>
-          <li><a href="index1.php">Records</a></li>
-          <a href="login.php" class="logout-btn">Logout</a>
-        </ul>
-      </div>
+      <div class="navigation"> 
+                 <ul>
+                    <li><a href="admin_dashboard.php">Home</a></li>
+                    <li><a href="index1.php">Records</a></li>
+                    <li><a href="table.php">Time Table</a></li>
+                    <li><a href="noticeboard.php">Notice Board</a></li>
+                    <li><a href="marks_portal.php">Marks</a></li>
+                    <a href="login1.php" class="logout-btn">Logout</a>
+                 </ul>
+            </div>
     </div>
     <div class="container1">
       <div class="dashboard-header">
         <h1>Admin Dashboard</h1>
       </div>
       <div class="dashboard-cards">
-        <!-- Sample cards for dashboard -->
+        <?php
+        // Include database connection
+        include('dbconnection.php');
+
+        // Query to fetch total number of students
+        $query_total_students = mysqli_query($con, "SELECT COUNT(*) AS total_students FROM users WHERE role='student'");
+        // Check if query is successful
+        if ($query_total_students && mysqli_num_rows($query_total_students) > 0) {
+          $total_students_row = mysqli_fetch_assoc($query_total_students);
+          $total_students = $total_students_row['total_students'];
+        } else {
+          $total_students = 0;
+        }
+        
+        // Query to fetch total number of teachers
+        $query_total_teachers = mysqli_query($con, "SELECT COUNT(*) AS total_teachers FROM users WHERE role='teacher'");
+        // Check if query is successful
+        if ($query_total_teachers && mysqli_num_rows($query_total_teachers) > 0) {
+          $total_teachers_row = mysqli_fetch_assoc($query_total_teachers);
+          $total_teachers = $total_teachers_row['total_teachers'];
+          
+        } else {
+          $total_teachers = 0;
+        }
+        ?>
         <div class="card">
           <h2>Total Students</h2>
-          <p>500</p>
+          <p><?php echo $total_students?></p>
         </div>
         <div class="card">
-          <h2>Total Courses</h2>
-          <p>20</p>
-        </div>
-        <div class="card">
-          <h2>Attendance Rate</h2>
-          <p>75%</p>
+          <h2>Total Teachers</h2>
+          <p><?php echo $total_teachers; ?></p>
         </div>
         <!-- Add more cards as needed -->
       </div>
@@ -117,9 +143,6 @@
       </div>
     </div>
   </div>
-
-
-
 </body>
 
 </html>

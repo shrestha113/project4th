@@ -2,14 +2,14 @@
 session_start();
 
 // Check if the username is stored in the session
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['User_id'])) {
     // Redirect to the login page if the user is not logged in
-    header("Location: login.php");
+    header("Location: login1.php");
     exit;
 }
 
 // Retrieve the username from the session
-$username = $_SESSION['username'];
+$username = $_SESSION['User_id'];
 
 // Include database connection
 include ('dbconnection.php');
@@ -20,7 +20,7 @@ $lastName = "";
 $photoPath = ""; // Or photo binary data
 
 // Query to fetch first and last name and photo path based on username
-$query_info = mysqli_query($con, "SELECT FirstName, LastName, Photo FROM tabledata WHERE StudentID='$username'");
+$query_info = mysqli_query($con, "SELECT FirstName, LastName, Photo FROM users WHERE User_id='$username'");
 if ($query_info && mysqli_num_rows($query_info) > 0) {
     $row = mysqli_fetch_assoc($query_info);
     $firstName = $row['FirstName'];
@@ -72,11 +72,11 @@ if ($query_info && mysqli_num_rows($query_info) > 0) {
             </div>
             <div class="navigation">
                 <ul>
-                    <li><a href="portal.php">Home</a></li>
-                    <li><a href="examform.php">Registration Form</a></li>
+                    <li><a href="portal1.php">Home</a></li>
                     <li><a href="timetable.php">Time Table</a></li>
-                    <li><a href="marks.php">Marks</a></li>
                     <li><a href="notice.php">Notice Board</a></li>
+                    <li><a href="marks1.php">Marks</a></li>
+                    <li><a href="assignment_portal.php">Assignment</a></li>
                     <li><a href="logout.php" class="logout-btn">Logout</a></li>
                 </ul>
             </div>
@@ -91,7 +91,7 @@ if ($query_info && mysqli_num_rows($query_info) > 0) {
                     </tr>
                     <?php
                     // Query to fetch personal information based on username
-                    $query_personal_info = mysqli_query($con, "SELECT * FROM tabledata WHERE StudentID='$username'");
+                    $query_personal_info = mysqli_query($con, "SELECT * FROM users WHERE User_ID='$username'");
                     while ($row = mysqli_fetch_assoc($query_personal_info)) {
                         ?>
                         <tr>
@@ -116,7 +116,7 @@ if ($query_info && mysqli_num_rows($query_info) > 0) {
                         </tr>
                         <tr>
                             <td>Student ID</td>
-                            <td><?php echo $row['StudentID']; ?></td>
+                            <td><?php echo $row['User_id']; ?></td>
                         </tr>
                         <tr>
                             <td>Course</td>
@@ -141,7 +141,7 @@ if ($query_info && mysqli_num_rows($query_info) > 0) {
                     </tr>
                     <?php
                     // Query to fetch contact information based on username
-                    $query_contact_info = mysqli_query($con, "SELECT * FROM tabledata WHERE StudentID='$username'");
+                    $query_contact_info = mysqli_query($con, "SELECT * FROM users WHERE User_id='$username'");
                     while ($row = mysqli_fetch_assoc($query_contact_info)) {
                         ?>
                         <tr>
