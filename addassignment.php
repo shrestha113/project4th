@@ -1,14 +1,11 @@
 <?php
 session_start();
 $uid=$_SESSION['id'];
-// Check if the username is stored in the session
 if (!isset($_SESSION['User_id'])) {
-    // Redirect to the login page if the user is not logged in
     header("Location: login1.php");
     exit;
 }
 
-// Retrieve the username from the session
 $username = $_SESSION['User_id'];
 
 // Include database connection

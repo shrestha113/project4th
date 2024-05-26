@@ -3,7 +3,7 @@
 include('dbconnection.php');
 
 if (isset($_GET['delid'])) {
-    $delete_id = intval($_GET['delid']); // Sanitize the input to prevent SQL injection
+    $delete_id = intval($_GET['delid']); 
 
     // Code for deletion           
     

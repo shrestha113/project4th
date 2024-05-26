@@ -88,7 +88,8 @@ if ($query_info && mysqli_num_rows($query_info) > 0) {
                    
                     <?php
                     // Query to fetch marks information based on username
-                    $query_marks_info = mysqli_query($con, "SELECT * FROM marks WHERE User_id='$username'");
+                $id=$_SESSION['id'];
+                    $query_marks_info = mysqli_query($con, "SELECT * FROM marks WHERE User_id=$id");
                     if ($query_marks_info && mysqli_num_rows($query_marks_info) > 0) {
                         while ($row = mysqli_fetch_assoc($query_marks_info)) {
                             ?>

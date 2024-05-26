@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
         $token = $_POST['token'];
 
-        if ($password === $confirm_password) {
+        // Check if passwords match and are at least 8 characters long
+        if ($password === $confirm_password && strlen($password) >= 8) {
             // Update password
             $sql = "UPDATE users SET Password=? WHERE Email=? AND reset_token=?";
             $stmt = $conn->prepare($sql);
@@ -38,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $success_message = "Your password has been successfully reset.";
         } else {
-            // Passwords do not match
-            $error_message = "Passwords do not match.";
+            // Passwords do not match or not long enough
+            $error_message = "Passwords do not match or are not at least 8 characters long.";
         }
 
         $stmt->close();
