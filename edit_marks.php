@@ -3,7 +3,7 @@
 include('dbconnection.php');
 
 // Initialize variables
-$student_id = $subject1 = $marks1 =  $subject2 = $marks2 = $subject3 = $marks3 = $subject4 = $marks4 = $subject5 = $marks5 = $gpa = '';
+$student_id = $sem = $subject1 = $marks1 =  $subject2 = $marks2 = $subject3 = $marks3 = $subject4 = $marks4 = $subject5 = $marks5 = $gpa = '';
 
 if (isset($_POST['submit'])) {
     // Getting the post values
@@ -20,13 +20,14 @@ if (isset($_POST['submit'])) {
     $subject5 = $_POST['subject5'];
     $marks5 = floatval($_POST['marks5']);
     $gpa = ($marks1 + $marks2 + $marks3 + $marks4 + $marks5) / 5;
-    if ($_POST['edit_id']) {
+
+    if (isset($_POST['edit_id']) && !empty($_POST['edit_id'])) {
         // Update existing data
-        $edit_id = $_POST['edit_id'];
-        $query = mysqli_prepare($con, "UPDATE marks SET  subject1=?,semester=?, marks1=?,  subject2=?, marks2=?, subject3=?, marks3=?, subject4=?, marks4=?,  subject5=?, marks5=?,gpa=? WHERE User_id=?");
+        $edit_id = intval($_POST['edit_id']);
+        $query = mysqli_prepare($con, "UPDATE marks SET subject1=?, semester=?, marks1=?, subject2=?, marks2=?, subject3=?, marks3=?, subject4=?, marks4=?, subject5=?, marks5=?, gpa=? WHERE User_id=?");
 
         // Bind parameters
-        mysqli_stmt_bind_param($query, "ssdsdsdsdsddi",  $subject1,$sem,$marks1,$subject2, $marks2,  $subject3, $marks3,  $subject4, $marks4,  $subject5, $marks5,$gpa, $edit_id);
+        mysqli_stmt_bind_param($query, "ssdsdsdsdsddi", $subject1, $sem, $marks1, $subject2, $marks2, $subject3, $marks3, $subject4, $marks4, $subject5, $marks5, $gpa, $edit_id);
 
         // Execute query
         $result = mysqli_stmt_execute($query);
@@ -42,10 +43,10 @@ if (isset($_POST['submit'])) {
         mysqli_stmt_close($query);
     } else {
         // Insert new data
-        $query = mysqli_prepare($con, "INSERT INTO marks (student_id, subject1, marks1,subject2, marks2, subject3, marks3, subject4, marks4,  subject5, marks5,gpa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+        $query = mysqli_prepare($con, "INSERT INTO marks (student_id, semester, subject1, marks1, subject2, marks2, subject3, marks3, subject4, marks4, subject5, marks5, gpa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         // Bind parameters
-        mysqli_stmt_bind_param($query, "isdsdsdsdsdd", $student_id, $sem,    $subject1, $marks1,  $subject2, $marks2,  $subject3, $marks3, $subject4, $marks4,  $subject5, $marks5,$gpa);
+        mysqli_stmt_bind_param($query, "isdsdsdsdsdd", $student_id, $sem, $subject1, $marks1, $subject2, $marks2, $subject3, $marks3, $subject4, $marks4, $subject5, $marks5, $gpa);
 
         // Execute query
         $result = mysqli_stmt_execute($query);
@@ -74,7 +75,7 @@ if (isset($_GET['editid'])) {
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $sem= $row['semester'];
+        $sem = $row['semester'];
         $student_id = $row['User_id'];
         $subject1 = $row['subject1'];
         $marks1 = $row['marks1'];
@@ -115,6 +116,7 @@ if (isset($_GET['editid'])) {
             padding: 30px;
             border-radius: 5px;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            margin-left: 40%;
         }
 
         .signup-form h2 {
@@ -196,44 +198,65 @@ if (isset($_GET['editid'])) {
 </head>
 
 <body>
-    <div class="container">
-        <div class="signup-form">
-            <form method="POST" enctype="multipart/form-data">
-                <h2>Edit Marks</h2>
-                <p>Fill in the marks below.</p>
-                <div class="form-group">
-                    <input type="text" name="semester" placeholder="Semester" value="<?php echo $sem; ?>" required>
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
-                    <input type="text" name="subject1" placeholder="Subject 1" value="<?php echo $subject1; ?>" required>
-                    <input type="text" name="marks1" placeholder="Marks 1" value="<?php echo $marks1; ?>" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject2" placeholder="Subject 2" value="<?php echo $subject2; ?>" required>
-                    <input type="text" name="marks2" placeholder="Marks 2" value="<?php echo $marks2; ?>" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject3" placeholder="Subject 3" value="<?php echo $subject3; ?>" required>
-                    <input type="text" name="marks3" placeholder="Marks 3" value="<?php echo $marks3; ?>" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject4" placeholder="Subject 4" value="<?php echo $subject4; ?>" required>
-                    <input type="text" name="marks4" placeholder="Marks 4" value="<?php echo $marks4; ?>" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject5" placeholder="Subject 5" value="<?php echo $subject5; ?>" required>
-                    <input type="text" name="marks5" placeholder="Marks 5" value="<?php echo $marks5; ?>" required>
-                </div>
-                <?php if(isset($_GET['editid'])): ?>
-                    <input type="hidden" name="edit_id" value="<?php echo $_GET['editid']; ?>">
-                <?php endif; ?>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Submit</button>
-                </div>
-            </form>
+    <!-- heading  -->
+
+    <div class="head_wrap">
+        <div class="side_menu">
+            <div class="avatar_profile">
+                <img src="./src/images/ass.png" alt="">
+            </div>
+            <div class="student_info">
+                <h3>Admin</h3>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><a href="admin_dashboard.php">Home</a></li>
+                    <li><a href="index1.php">Records</a></li>
+                    <li><a href="table.php">Time Table</a></li>
+                    <li><a href="noticeboard.php">Notice Board</a></li>
+                    <li><a href="marks_portal.php">Marks</a></li>
+                    <a href="login1.php" class="logout-btn">Logout</a>
+                </ul>
+            </div>
         </div>
-    </div>
+        <div class="container">
+            <div class="signup-form">
+                <form method="POST" enctype="multipart/form-data">
+                    <h2>Edit Marks</h2>
+                    <p>Fill in the marks below.</p>
+                    <div class="form-group">
+                        <input type="text" name="semester" placeholder="Semester" value="<?php echo htmlspecialchars($sem); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($student_id); ?>">
+                        <input type="text" name="subject1" placeholder="Subject 1" value="<?php echo htmlspecialchars($subject1); ?>" required>
+                        <input type="number" name="marks1"  min="0" max="4" step="0.1" placeholder="Marks 1" value="<?php echo htmlspecialchars($marks1); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject2" placeholder="Subject 2" value="<?php echo htmlspecialchars($subject2); ?>" required>
+                        <input type="number" name="marks2"  min="0" max="4" step="0.1" placeholder="Marks 2" value="<?php echo htmlspecialchars($marks2); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject3" placeholder="Subject 3" value="<?php echo htmlspecialchars($subject3); ?>" required>
+                        <input type="number" name="marks3"  min="0" max="4" step="0.1" placeholder="Marks 3" value="<?php echo htmlspecialchars($marks3); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject4" placeholder="Subject 4" value="<?php echo htmlspecialchars($subject4); ?>" required>
+                        <input type="number" name="marks4"  min="0" max="4" step="0.1" placeholder="Marks 4" value="<?php echo htmlspecialchars($marks4); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject5" placeholder="Subject 5" value="<?php echo htmlspecialchars($subject5); ?>" required>
+                        <input type="number" name="marks5"  min="0" max="4" step="0.1" ++placeholder="Marks 5" value="<?php echo htmlspecialchars($marks5); ?>" required>
+                    </div>
+                    <?php if (isset($_GET['editid'])) : ?>
+                        <input type="hidden" name="edit_id" value="<?php echo htmlspecialchars($_GET['editid']); ?>">
+                    <?php endif; ?>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg btn-block" name="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 </body>
 
 </html>

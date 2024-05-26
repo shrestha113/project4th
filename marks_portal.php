@@ -198,7 +198,7 @@ if (isset($_GET['delid'])) {
                             if ($num_rows == 0) {
                                 ?>
                                 <a href="add_marks.php?addid=<?php echo htmlentities($row['id']); ?>"
-                                    class="add-marks-btn" title="Add Marks" data-toggle="tooltip"><i class='fas fa-eye'></i></a>
+                                    class="add-marks-btn" title="Add Marks" data-toggle="tooltip"><i class='fas fa-plus'></i></a>
                             <?php } ?>
                             <a href="edit_marks.php?editid=<?php echo htmlentities($row['id']); ?>"
                                 class="edit-marks-btn" title="Edit Marks" data-toggle="tooltip"><i class='fas fa-edit'></i></a>

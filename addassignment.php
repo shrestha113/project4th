@@ -252,13 +252,11 @@ button[type="submit"] {
         </div>
         <div class="navigation">
         <ul>
-                    <li><a href="admin_dashboard.php">Home</a></li>
-                    <li><a href="index1.php">Records</a></li>
-                    <li><a href="table.php">Time Table</a></li>
-                    <li><a href="noticeboard.php">Notice Board</a></li>
-                    <li><a href="marks_portal.php">Add Marks</a></li>
-                    <a href="login1.php" class="logout-btn">Logout</a>
-                 </ul>
+                    <li><a href="teacher_dashboard.php">Home</a></li>
+                    <li><a href="assignment.php">Assignment</a></li>
+                    <li><a href="teacher_notice.php">Notice Board</a></li>
+                    <li><a href="logout.php" class="logout-btn">Logout</a></li>
+                </ul>
         </div>
     </div>
 

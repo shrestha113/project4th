@@ -289,11 +289,12 @@ button[type="submit"] {
             </div>
             <div class="navigation">
             <ul>
-                    <li><a href="admin_dashboard.php">Home</a></li>
+                    <li><a href="teacher_dashboard.php">Home</a></li>
+                    <li><a href="assignment.php">Assignment</a></li>
                     <li><a href="teacher_notice.php">Notice Board</a></li>
-                    <a href="login1.php" class="logout-btn">Logout</a>
-                 </ul>
-            </div>go
+                    <li><a href="logout.php" class="logout-btn">Logout</a></li>
+                </ul>
+            </div>
         </div>
 
         <div class="info_tab">

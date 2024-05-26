@@ -52,7 +52,6 @@ if (isset($_GET['addid'])) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            color: #fff;
             background: #63738a;
             margin: 0;
             padding: 0;
@@ -157,13 +156,15 @@ if (isset($_GET['addid'])) {
                 <h3>Admin</h3>
             </div>
             <div class="navigation">
-                <ul>
+            <ul>
                     <li><a href="admin_dashboard.php">Home</a></li>
                     <li><a href="index1.php">Records</a></li>
                     <li><a href="table.php">Time Table</a></li>
-                    <a href="login.php" class="logout-btn">Logout</a>
-                </ul>
-                </ul>
+                    <li><a href="noticeboard.php">Notice Board</a></li>
+                    <li><a href="marks_portal.php">Marks</a></li>
+                    <a href="login1.php" class="logout-btn">Logout</a>
+                 </ul>
+                
             </div>
         </div>
 
@@ -177,23 +178,23 @@ if (isset($_GET['addid'])) {
                     </div>
                     <div class="form-group">
                         <input type="text" name="subject1" placeholder="Subject 1" required>
-                        <input type="text" name="marks1" placeholder="Marks 1" pattern="[0-9]+" required>
+                        <input type="number" name="marks1" placeholder="Marks 1" pattern="[0-9]+" min="0" max="4" step="0.1" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="subject2" placeholder="Subject 2" required>
-                        <input type="text" name="marks2" placeholder="Marks 2" required>
+                        <input type="number" name="marks2" placeholder="Marks 2"min="0" max="4" step="0.1" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="subject3" placeholder="Subject 3" required>
-                        <input type="text" name="marks3" placeholder="Marks 3" required>
+                        <input type="number" name="marks3" placeholder="Marks 3"min="0" max="4" step="0.1" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="subject4" placeholder="Subject 4" required>
-                        <input type="text" name="marks4" placeholder="Marks 4" required>
+                        <input type="number" name="marks4" placeholder="Marks 4" min="0" max="4" step="0.1" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="subject5" placeholder="Subject 5" required>
-                        <input type="text" name="marks5" placeholder="Marks 5" required>
+                        <input type="number" name="marks5" placeholder="Marks 5" min="0" max="4" step="0.1"     required>
                     </div>
                     <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
                     <div class="form-group">

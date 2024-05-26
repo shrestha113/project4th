@@ -5,7 +5,16 @@ $errors = [];
 
 if (isset($_POST['submit'])) {
     // Validate required fields
-    $required_fields = ['fname', 'lname', 'dob', 'gender', 'role', 'nationality', 'User_id', 'password', 'email', 'phone', 'address', 'emergency_contact_name', 'emergency_contact_number'];
+    $required_fields = ['fname', 'lname', 'dob', 'gender', 'role', 'nationality', 'User_id', 'password', 'email', 'phone', 'address'];
+    if ($_POST['role'] === 'student') {
+        $required_fields[] = 'emergency_contact_name';
+        $required_fields[] = 'emergency_contact_number';
+        $required_fields[] = 'course';
+        $required_fields[] = 'semester';
+    } elseif ($_POST['role'] === 'teacher') {
+        $required_fields[] = 'course';
+    }
+
     foreach ($required_fields as $field) {
         if (empty($_POST[$field])) {
             $errors[$field] = ucfirst($field) . " is required.";
@@ -23,7 +32,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Validate emergency contact number format
-    if (!preg_match("/^[0-9]{10}$/", $_POST['emergency_contact_number'])) {
+    if (!preg_match("/^[0-9]{10}$/", $_POST['emergency_contact_number']) && $_POST['role'] === 'student') {
         $errors['emergency_contact_number'] = "Invalid emergency contact number format. It should be 10 digits.";
     }
 
@@ -35,15 +44,15 @@ if (isset($_POST['submit'])) {
         $gender = $_POST['gender'];
         $role = $_POST['role'];
         $nationality = $_POST['nationality'];
-        $student_id = $_POST['User_id']; // Changed from $user_id
+        $student_id = $_POST['User_id'];
         $password = $_POST['password'];
-        $course = $_POST['course'];
-        $semester = $_POST['semester'];
+        $course = $_POST['course'] ?? '';
+        $semester = $_POST['semester'] ?? '';
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $address = $_POST['address'];
-        $emergency_contact_name = $_POST['emergency_contact_name'];
-        $emergency_contact_number = $_POST['emergency_contact_number'];
+        $emergency_contact_name = $_POST['emergency_contact_name'] ?? '';
+        $emergency_contact_number = $_POST['emergency_contact_number'] ?? '';
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -54,11 +63,11 @@ if (isset($_POST['submit'])) {
         mysqli_stmt_store_result($check_query);
 
         if (mysqli_stmt_num_rows($check_query) > 0) {
-            $errors['User_id'] = "User ID already exists. Please choose a different User ID.";
+            echo "<script>alert('User id already exists. Please try again');</script>";
+            exit();
         }
 
         mysqli_stmt_close($check_query);
-
 
         // Handle file upload
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
@@ -147,7 +156,6 @@ if (isset($_POST['submit'])) {
         .form-group textarea,
         .form-group select {
             width: calc(50% - 5px);
-            /* Adjust the width as needed */
             height: 40px;
             border: 1px solid #ccc;
             border-radius: 3px;
@@ -159,7 +167,6 @@ if (isset($_POST['submit'])) {
 
         .form-group select {
             width: 100%;
-            /* Full width for select dropdown */
         }
 
         .form-group textarea {
@@ -170,7 +177,6 @@ if (isset($_POST['submit'])) {
             width: 100%;
         }
 
-        /* For smaller screens, adjust the input width to 100% */
         @media screen and (max-width: 768px) {
 
             .form-group input,
@@ -212,14 +218,14 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="navigation">
-            <ul>
+                <ul>
                     <li><a href="admin_dashboard.php">Home</a></li>
                     <li><a href="index1.php">Records</a></li>
                     <li><a href="table.php">Time Table</a></li>
                     <li><a href="noticeboard.php">Notice Board</a></li>
                     <li><a href="marks_portal.php">Marks</a></li>
                     <a href="login1.php" class="logout-btn">Logout</a>
-                 </ul>
+                </ul>
             </div>
         </div>
 
@@ -230,7 +236,7 @@ if (isset($_POST['submit'])) {
                     <p>Fill below form.</p>
                     <div class="form-group">
                         <input type="text" name="fname" placeholder="First Name" pattern="[A-Za-z]+" required>
-                        <input type="text" name="lname" placeholder="Last Name"pattern="[A-Za-z]+" required>
+                        <input type="text" name="lname" placeholder="Last Name" pattern="[A-Za-z]+" required>
                     </div>
                     <div class="form-group">
                         <input type="date" name="dob" placeholder="Date of Birth" required>
@@ -242,7 +248,7 @@ if (isset($_POST['submit'])) {
                         </select>
                     </div>
                     <div class="form-group">
-                        <select name="role" required>
+                        <select name="role" id="role" required onchange="toggleFields()">
                             <option value="">Select Role</option>
                             <option value="student">Student</option>
                             <option value="teacher">Teacher</option>
@@ -255,10 +261,10 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                         <input type="password" name="password" placeholder="Password" required>
-                        <input type="text" name="course" placeholder="Course" >
+                        <input type="text" name="course" id="course" placeholder="Course">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="semester" placeholder="Semester" >
+                        <input type="text" name="semester" id="semester" placeholder="Semester">
                         <input type="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
@@ -266,10 +272,8 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="address" placeholder="Address" required></input>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="emergency_contact_name" placeholder="Emergency Contact Person Name"
-                            >
-                        <input type="tel" name="emergency_contact_number" placeholder="Emergency Contact Number"
-                             pattern="[0-9]{10}">
+                        <input type="text" name="emergency_contact_name" id="emergency_contact_name" placeholder="Emergency Contact Person Name">
+                        <input type="tel" name="emergency_contact_number" id="emergency_contact_number" placeholder="Emergency Contact Number" pattern="[0-9]{10}">
                     </div>
                     <div class="form-group">
                         <label for="photo">Upload Photo:</label>
@@ -284,6 +288,39 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
     <script>
+        function toggleFields() {
+            var role = document.getElementById('role').value;
+            var course = document.getElementById('course');
+            var semester = document.getElementById('semester');
+            var emergency_contact_name = document.getElementById('emergency_contact_name');
+            var emergency_contact_number = document.getElementById('emergency_contact_number');
+
+            if (role === 'student') {
+                course.style.display = 'inline-block';
+                semester.style.display = 'inline-block';
+                emergency_contact_name.style.display = 'inline-block';
+                emergency_contact_number.style.display = 'inline-block';
+            } else if (role === 'teacher') {
+                course.style.display = 'none';
+                semester.style.display = 'none';
+                emergency_contact_name.style.display = 'none';
+                emergency_contact_number.style.display = 'none';
+            } else if (role === 'admin') {
+                course.style.display = 'none';
+                semester.style.display = 'none';
+                emergency_contact_name.style.display = 'none';
+                emergency_contact_number.style.display = 'none';
+            } else {
+                course.style.display = 'none';
+                semester.style.display = 'none';
+                emergency_contact_name.style.display = 'none';
+                emergency_contact_number.style.display = 'none';
+            }
+        }
+        
+        // Initial call to set fields correctly based on default selection
+        toggleFields();
+
         function validateForm() {
             var firstName = document.forms["userForm"]["fname"].value;
             var lastName = document.forms["userForm"]["lname"].value;
@@ -296,13 +333,37 @@ if (isset($_POST['submit'])) {
             var email = document.forms["userForm"]["email"].value;
             var phone = document.forms["userForm"]["phone"].value;
             var address = document.forms["userForm"]["address"].value;
-            var emergencyContactName = document.forms["userForm"]["emergency_contact_name"].value;
-            var emergencyContactNumber = document.forms["userForm"]["emergency_contact_number"].value;
 
             // Validation logic
-            if (firstName == "" || lastName == "" || dob == "" || gender == "" || role == "" || nationality == "" || userId == "" || password == "" || email == "" || phone == "" || address == "" || emergencyContactName == "" || emergencyContactNumber == "") {
+            if (firstName == "" || lastName == "" || dob == "" || gender == "" || role == "" || nationality == "" || userId == "" || password == "" || email == "" || phone == "" || address == "") {
                 alert("All fields are required.");
                 return false;
+            }
+
+            if (role === 'student') {
+                var emergencyContactName = document.forms["userForm"]["emergency_contact_name"].value;
+                var emergencyContactNumber = document.forms["userForm"]["emergency_contact_number"].value;
+                var course = document.forms["userForm"]["course"].value;
+                var semester = document.forms["userForm"]["semester"].value;
+
+                if (emergencyContactName == "" || emergencyContactNumber == "" || course == "" || semester == "") {
+                    alert("All fields are required for students.");
+                    return false;
+                }
+
+                // Validate emergency contact number format
+                var phoneRegex = /^[0-9]{10}$/;
+                if (!phoneRegex.test(emergencyContactNumber)) {
+                    alert("Invalid emergency contact number format. It should be 10 digits.");
+                    return false;
+                }
+            } else if (role === 'teacher') {
+                var course = document.forms["userForm"]["course"].value;
+
+                if (course == "") {
+                    alert("Course field is required for teachers.");
+                    return false;
+                }
             }
 
             // Validate email format
@@ -322,13 +383,7 @@ if (isset($_POST['submit'])) {
                 alert("Password must be at least 8 characters long.");
                 return false;
             }
-            // Validate emergency contact number format
-            if (!phoneRegex.test(emergencyContactNumber)) {
-                alert("Invalid emergency contact number format. It should be 10 digits.");
-                return false;
-            }
 
-            // If all validations pass, return true
             return true;
         }
     </script>
