@@ -7,71 +7,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
     $username = "root";
     $password = ""; // Or your MySQL password
-    $dbname = "project";
+    $dbname = "phpcrud";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+
     // Retrieve form data
-    if (isset($_POST['User_id']) && isset($_POST['password']) && isset($_POST['role'])) {
-        $username = $_POST['User_id'];
+    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role'])) {
+        $username = $_POST['username'];
         $password = $_POST['password'];
         $role = $_POST['role'];
 
         // Validate login credentials
-        $sql = "SELECT * FROM users WHERE User_id=? AND Role=?";
+        $sql = "SELECT * FROM users WHERE username=? AND password=? AND role=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $username, $role);
+        $stmt->bind_param("sss", $username, $password, $role);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                if (password_verify($password, $row['Password'])) {
-                    // Login successful, set session username and role
-                    $_SESSION['User_id'] = $username;
-                    $_SESSION['Role'] = $role;
-        
-                    // Redirect to dashboard
-                    switch ($role) {
-                        case 'student':
-                            header("Location: portal1.php");
-                            exit; // Exit after redirection
-                            break; // Add break statement
-                        case 'teacher':
-                            header("Location: teacher_dashboard.php");
-                            exit; // Exit after redirection
-                            break; // Add break statement
-                        case 'admin':
-                            header("Location: admin_dashboard.php");
-                            exit; // Exit after redirection
-                            break; // Add break statement
-                    }
-                } else {
-                    // Login failed, set error message
-                    $error_message = "Invalid password.";
-                    break; // Add break statement
-                }
+            // Login successful, set session variables and redirect
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+
+            // Redirect to dashboard
+            switch ($role) {
+                case 'student':
+                    header("Location: portal1.php");
+                    exit;
+                case 'teacher':
+                    header("Location: teacher_dashboard.php");
+                    exit;
+                case 'admin':
+                    header("Location: admin_dashboard.php");
+                    exit;
             }
         } else {
             // Login failed, set error message
-            $error_message = "Invalid username or role.";
+            $error_message = "Invalid username or password or role.";
         }
-        
 
         $stmt->close();
     } else {
         // Form fields are not set, set error message
         $error_message = "Form fields are not set.";
     }
-    
+
     $conn->close();
 }
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,11 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         button:hover {
             background-color: #0056b3;
         }
-
-        .forgot-password {
-            margin-top: 10px;
-            text-align: center;
-        }
     </style>
 </head>
 
@@ -145,17 +128,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<p style="color: red;">' . $error_message . '</p>';
         }
         ?>
-        <form id="login-form" action="login1.php" method="POST">
-            <input type="text" name="User_id" placeholder="User_id" required>
+        <form id="login-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <select name="role" required>
                 <option value="student">Student</option>
                 <option value="teacher">Teacher</option>
                 <option value="admin">Admin</option>
             </select>
-        <div class="forgot-password">
-            <a href="forgot_password.php">Forgot Password?</a>
-        </div>
             <button type="submit">Login</button>
         </form>
     </div>

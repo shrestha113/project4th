@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $stmt->close();
-    } else {
+    } else {    
         // Form fields are not set, set error message
         $error_message = "Form fields are not set.";
     }

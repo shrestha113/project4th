@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="src/style.css" />
+  <body>
+    <!--  -->
+
+    <header>
+      <div class="nav_Container">
+        <nav class="navbar">
+          <a class="logooo" href="/index.html" class="nav-logo">
+            Student Portal
+          </a>
+
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="/index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">About</a>
+            </li>
+           
+            
+            <li class="nav-item">
+              <a href="" class="nav-link">Log in </a>
+            </li>
+          </ul>
+
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- form -->
+
+    <form action="action_page.php" method="post">
+      <div class="form_container">
+        <div>
+          <label for="uname"><b>Username</b></label><br>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="uname"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="psw"><b>Password</b></label><br>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
+        </div>
+
+        <button type="submit">Login</button>
+
+        <span class="register_new_acc">
+          <a href="register.html">register new account</a>
+        </span>
+      </div>
+    </form>
+  </body>
+</html>

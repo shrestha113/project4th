@@ -1,0 +1,42 @@
+.navy{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    z-index: -1;
+}
+
+.main{
+    height: 80vh;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.main h2{
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.main p{
+    font-size: 20px;
+}
+
+.main button{
+    padding: 16px 32px;
+    border-style: none;
+    background-color: maroon;
+    border-radius: 4px;
+    letter-spacing: 4px;
+    margin-top: 15px;
+}
+
+
+
+
